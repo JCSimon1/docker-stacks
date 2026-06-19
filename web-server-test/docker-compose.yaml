@@ -3,6 +3,8 @@ services:
     image: ghcr.io/jcsimon1/web-server-test:latest
     restart: unless-stopped
     container_name: compose-web
+    env_file:
+      - .env
     ports:
       - "${PORT_EXTERNAL:-8080}:80"
     volumes:
