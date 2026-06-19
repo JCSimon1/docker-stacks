@@ -4,6 +4,6 @@ services:
     restart: unless-stopped
     container_name: compose-web
     ports:
-      - "${PORT_EXTERNAL}:80"
+      - "7777:80"
     volumes:
       - /mnt/smbshare/tmp/web/html:/usr/share/nginx/html:ro
