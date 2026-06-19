@@ -3,6 +3,6 @@ services:
     image: nginx
     container_name: compose-web
     ports:
-      - "8080:80"
+      - "8765:80"
     volumes:
       - ./html:/usr/share/nginx/html
