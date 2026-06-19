@@ -4,10 +4,32 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'web-server-test/**'
+
+permissions:
+  contents: read
+  packages: write
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo "Workflow funktioniert"
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Push
+        uses: docker/build-push-action@v6
+        with:
+          context: ./web-server-test
+          file: ./web-server-test/Dockerfile
+          push: true
+          tags: ghcr.io/jcsimon1/web-server-test:latest
