@@ -1,6 +1,6 @@
 services:
   web:
-    image: ghcr.io/jcsimon1/docker-stacks/web-server-test:latest
+    image: ghcr.io/jcsimon1/web-server-test:latest
     restart: unless-stopped
     container_name: compose-web
     ports:
