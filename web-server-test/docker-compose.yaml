@@ -1,7 +1,6 @@
 services:
   web:
     image: nginx:latest
-    user: "100000:100000"
     container_name: compose-web
     ports:
       - "8765:80"
