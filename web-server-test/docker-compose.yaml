@@ -4,4 +4,4 @@ services:
     restart: unless-stopped
     container_name: compose-web
     ports:
-      - "8765:80"
+      - "${PORT_EXTERNAL}:80"
