@@ -18,6 +18,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+ 
+      - name: Create .env file
+          run: |
+            cp .env.example .env
+            echo "PORT_EXTERNAL=${{ secrets.PORT_EXTERNAL }}" >> .env
+            echo "SOURCE_LOCATION=${{ secrets.SOURCE_LOCATION }}" >> .env
 
       - name: Login to GHCR
         uses: docker/login-action@v3
