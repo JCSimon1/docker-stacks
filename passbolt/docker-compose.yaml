@@ -1,0 +1,61 @@
+services:
+  db:
+    image: mariadb:10.11
+    container_name: passbolt-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: "passbolt"
+      MYSQL_USER: "passbolt"
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - database_volume:/var/lib/mysql
+    networks:
+      - passbolt_internal
+
+  passbolt:
+    image: passbolt/passbolt:5.12.0-1-ce
+    container_name: passbolt
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      APP_FULL_BASE_URL: ${APP_URL}
+      DATASOURCES_DEFAULT_HOST: "db"
+      DATASOURCES_DEFAULT_USERNAME: "passbolt"
+      DATASOURCES_DEFAULT_PASSWORD: ${DB_PASSWORD}
+      DATASOURCES_DEFAULT_DATABASE: "passbolt"
+      PASSBOLT_SSL_FORCE: "false"
+      EMAIL_TRANSPORT_DEFAULT_HOST: ${EMAIL_TRANSPORT_DEFAULT_HOST}
+      EMAIL_TRANSPORT_DEFAULT_PORT: ${EMAIL_TRANSPORT_DEFAULT_PORT}
+      EMAIL_TRANSPORT_DEFAULT_USERNAME: ${EMAIL_TRANSPORT_DEFAULT_USERNAME}
+      EMAIL_TRANSPORT_DEFAULT_PASSWORD: ${EMAIL_TRANSPORT_DEFAULT_PASSWORD}
+      EMAIL_TRANSPORT_DEFAULT_TLS: ${EMAIL_TRANSPORT_DEFAULT_TLS}
+      EMAIL_DEFAULT_FROM: ${EMAIL_DEFAULT_FROM}
+    volumes:
+      - gpg_volume:/etc/passbolt/gpg
+      - jwt_volume:/etc/passbolt/jwt
+      - images_volume:/usr/share/php/passbolt/webroot/img/public
+    command:
+      [
+        "/usr/bin/wait-for.sh",
+        "-t",
+        "0",
+        "db:3306",
+        "--",
+        "/docker-entrypoint.sh",
+      ]
+    networks:
+      - passbolt_internal
+    ports:
+      - "192.168.178.77:8888:80"
+
+networks:
+  passbolt_internal:
+    driver: bridge
+
+volumes:
+  database_volume:
+  gpg_volume:
+  jwt_volume:
+  images_volume:
