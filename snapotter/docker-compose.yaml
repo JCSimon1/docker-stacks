@@ -1,0 +1,59 @@
+services:
+  SnapOtter:
+    image: ghcr.io/snapotter-hq/snapotter:1.17.2
+    container_name: SnapOtter 
+    ports:
+      - "1349:1349"
+    volumes:
+      - SnapOtter-data:/data
+    environment:
+      - AUTH_ENABLED=true
+      - DEFAULT_USERNAME=${USERNAME}
+      - DEFAULT_PASSWORD=${PASSWORD}
+      - DATABASE_URL=postgres://snapotter:snapotter@postgres:5432/snapotter
+      - REDIS_URL=redis://redis:6379
+      - MAX_UPLOAD_SIZE_MB=200
+      - CONCURRENT_JOBS=4
+      - FILE_MAX_AGE_HOURS=12
+      - SESSION_DURATION_HOURS=24
+      - LOG_LEVEL=info
+      - CORS_ORIGIN=
+      - TRUST_PROXY=true
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: snapotter
+    volumes:
+      - SnapOtter-pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U snapotter"]
+      interval: 60s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:8-alpine
+    command: ["redis-server", "--maxmemory-policy", "noeviction", "--appendonly", "yes"]
+    volumes:
+      - SnapOtter-redisdata:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 60s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  SnapOtter-data:
+  SnapOtter-pgdata:
+  SnapOtter-redisdata:
