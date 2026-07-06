@@ -1,7 +1,14 @@
+x-logging: &default-logging
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "3"
+  
 services:
   SnapOtter:
     image: ghcr.io/snapotter-hq/snapotter:1.17.2
-    container_name: SnapOtter 
+    container_name: SnapOtter
+    logging: *default-logging
     ports:
       - "1349:1349"
     volumes:
@@ -15,19 +22,14 @@ services:
       - MAX_UPLOAD_SIZE_MB=200
       - CONCURRENT_JOBS=4
       - FILE_MAX_AGE_HOURS=12
-      - SESSION_DURATION_HOURS=24
       - LOG_LEVEL=info
       - CORS_ORIGIN=
       - TRUST_PROXY=true
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
     restart: unless-stopped
 
   postgres:
     image: postgres:17-alpine
+    logging: *default-logging
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -43,6 +45,7 @@ services:
 
   redis:
     image: redis:8-alpine
+    logging: *default-logging
     command: ["redis-server", "--maxmemory-policy", "noeviction", "--appendonly", "yes"]
     volumes:
       - SnapOtter-redisdata:/data
