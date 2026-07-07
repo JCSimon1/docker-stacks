@@ -12,9 +12,22 @@ A lightweight Steam profile widget designed for Homarr.
 
 ## Development
 
+Install dependencies
+
 ```bash
 npm install
-npm run dev
+```
+
+Run lint
+
+```bash
+npm run lint
+```
+
+Format source
+
+```bash
+npm run format
 ```
 
 ## Docker
