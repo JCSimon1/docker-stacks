@@ -1,0 +1,187 @@
+:root {
+--glass-blur: blur(24px) saturate(180%) brightness(1.08);
+--glass-bg: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%);
+--glass-border: 1px solid rgba(255,255,255,0.18);
+--glass-border-top: 1px solid rgba(255,255,255,0.45);
+--glass-border-left: 1px solid rgba(255,255,255,0.22);
+--glass-shadow:
+0 8px 32px rgba(0,0,0,0.4),
+0 2px 8px rgba(0,0,0,0.25),
+inset 0 1px 0 rgba(255,255,255,0.25),
+inset 0 -1px 0 rgba(0,0,0,0.15),
+inset 1px 0 0 rgba(255,255,255,0.1);
+}
+/* ── Header ── */
+header {
+background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)) !important;
+backdrop-filter: var(--glass-blur) !important;
+-webkit-backdrop-filter: var(--glass-blur) !important;
+border-bottom: 1px solid rgba(255,255,255,0.12) !important;
+box-shadow: 0 4px 16px rgba(0,0,0,0.3), inset 0 -1px 0 rgba(255,255,255,0.08);
+}
+
+/* ── Sidebar ── */
+aside {
+background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)) !important;
+backdrop-filter: var(--glass-blur) !important;
+-webkit-backdrop-filter: var(--glass-blur) !important;
+border: var(--glass-border);
+border-top: var(--glass-border-top);
+border-bottom: 1px solid rgba(217, 72, 15, 0.2);
+box-shadow: var(--glass-shadow);
+}
+
+/* ── Avtive area ── */
+[data-active="true"] {
+background: rgba(255,255,255,0.12) !important;
+border: 1px solid rgba(255,255,255,0.2) !important;
+box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* ── Drag tiles ── */
+[data-dnd-draggable] {
+background: var(--glass-bg) !important;
+backdrop-filter: var(--glass-blur);
+-webkit-backdrop-filter: var(--glass-blur);
+border: var(--glass-border);
+border-top: var(--glass-border-top);
+border-left: var(--glass-border-left);
+box-shadow: var(--glass-shadow);
+border-radius: 16px;
+transition: box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+/* ── Hover icons ── */
+[data-dnd-draggable]:hover {
+box-shadow:
+0 12px 40px rgba(0,0,0,0.5),
+0 4px 12px rgba(0,0,0,0.3),
+inset 0 1px 0 rgba(255,255,255,0.3),
+inset 0 -1px 0 rgba(0,0,0,0.15),
+inset 1px 0 0 rgba(255,255,255,0.15);
+transform: translateY(-1px);
+}
+
+/* ── Adds a cool red glow ── */
+[data-dnd-draggable] a:hover,
+.grid-stack-item-content a:hover {
+filter: drop-shadow(0 0 8px rgba(180, 20, 40, 0.6));
+transition: filter 0.2s ease;
+}
+
+/* ── Widget areas ── */
+.grid-stack-item-content {
+background: linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.15) 100%) !important;
+backdrop-filter: var(--glass-blur);
+-webkit-backdrop-filter: var(--glass-blur);
+border: var(--glass-border) !important;
+border-top: var(--glass-border-top) !important;
+border-radius: 16px !important;
+box-shadow: var(--glass-shadow) !important;
+overflow: hidden;
+}
+
+/* Glass highlight on widget top edge */
+.grid-stack-item-content::before {
+content: '';
+position: absolute;
+top: 0; left: 10%; right: 10%;
+height: 1px;
+background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+border-radius: 0 0 50% 50%;
+pointer-events: none;
+z-index: 1;
+}
+
+/* ── Transparent background for media player ── */
+.grid-stack-item-content * {
+background-color: transparent !important;
+background: 0.0625rem solid rgba(55, 58, 64, 0.8);
+box-shadow: 0.0625rem solid rgba(55, 58, 64, 0.8);
+color: inherent !important;
+}
+
+/* ── Calendar event — preserve colors ── */
+.grid-stack-item-content .mantine-Flex-root div[style*="background: var(--mantine-color-blue-filled)"] {
+background: var(--mantine-color-blue-filled) !important;
+width: 8px !important;
+height: 3px !important;
+border-radius: 2px !important;
+margin: 0 1px !important;
+}
+
+.grid-stack-item-content .mantine-Flex-root div[style*="background: var(--mantine-color-yellow-filled)"] {
+background: var(--mantine-color-yellow-filled) !important;
+width: 8px !important;
+height: 3px !important;
+border-radius: 2px !important;
+margin: 0 1px !important;
+}
+
+/* ── Search bar ── */
+button.mantine-Input-input.mantine-TextInput-input {
+background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.04)) !important;
+border: var(--glass-border) !important;
+border-top: var(--glass-border-top) !important;
+box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 4px 12px rgba(0,0,0,0.25) !important;
+backdrop-filter: blur(12px) !important;
+border-radius: 24px !important;
+}
+
+/* ── Table rows ── */
+.MRT_TableBodyRow-module_root__2c3D4 td[data-column-pinned] {
+background-color: rgba(0,0,0,0) !important;
+}
+
+:root {
+--mrt-pinned-column-background-color: rgba(255,255,255,0.04) !important;
+}
+
+/* ── Main content area ── */
+main {
+backdrop-filter: blur(8px);
+-webkit-backdrop-filter: blur(8px);
+}
+
+/* ── Optional: subtle shimmer sweep animation ──
+Remove this block if you prefer a static look */
+u/keyframes glass-shimmer {
+0% { left: -60%; }
+100% { left: 120%; }
+}
+
+.grid-stack-item-content {
+overflow: hidden;
+position: relative;
+}
+
+u/keyframes glass-shimmer {
+0% { transform: skewX(-15deg) translateX(-150%); }
+100% { transform: skewX(-15deg) translateX(350%); }
+}
+
+.grid-stack-item-content::after {
+content: '';
+position: absolute;
+top: 0; left: 0;
+width: 40%; height: 100%;
+background: linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,0.04),
+transparent
+);
+
+animation: glass-shimmer 8s ease-in-out infinite;
+pointer-events: none;
+z-index: 0;
+overflow: hidden;
+}
+
+.grid-stack {
+overflow: hidden;
+}
+
+body {
+overflow-x: hidden;
+}
