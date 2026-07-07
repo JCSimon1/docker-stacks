@@ -208,6 +208,14 @@ npm run format
 
 Format the project using Prettier.
 
+## Screenshots
+
+### Browser
+![Chrome](/screenshots/Example_Screenshot_Chrome.jpg)
+
+### Homarr
+![Homarr](/screenshots/Example_Screenshot_Homarr.jpg)
+
 ---
 
 ## Roadmap
