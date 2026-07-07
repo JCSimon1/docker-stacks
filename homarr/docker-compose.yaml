@@ -14,5 +14,7 @@ services:
       - ./homarr/appdata:/appdata
     environment:
       - SECRET_ENCRYPTION_KEY=${SECRET_ENCRYPTION_KEY}
+      - DOCKER_HOSTNAMES=${DOCKER_HOSTNAMES}
+      - DOCKER_PORTS=${DOCKER_PORTS}
     ports:
       - '7575:7575'
