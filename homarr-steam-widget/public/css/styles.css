@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+    padding: 20px;
+    background: #111827;
+    color: white;
+    font-family: Inter, Arial, sans-serif;
+}
+
+.steam-widget {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 14px;
+    background: #1f2937;
+    max-width: 520px;
+}
+
+.avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+}
+
+.content {
+    flex: 1;
+}
+
+.content h2 {
+    margin: 0;
+}
+
+.status {
+    margin-top: 8px;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.status.online {
+    color: #34d399;
+}
+
+.status.offline {
+    color: #9ca3af;
+}
+
+.game {
+    margin: 16px 0;
+}
+
+a {
+    color: #60a5fa;
+    text-decoration: none;
+}
