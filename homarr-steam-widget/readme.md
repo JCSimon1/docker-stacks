@@ -30,6 +30,17 @@ Format source
 npm run format
 ```
 
+## Git Hooks
+
+Nach `npm install` werden Git Hooks automatisch eingerichtet.
+
+Vor jedem Commit werden:
+
+- ESLint
+- Prettier
+
+auf den geänderten Dateien ausgeführt.
+
 ## Docker
 
 ```bash
@@ -37,5 +48,4 @@ docker compose up -d
 ```
 
 Open:
-
-http://localhost:8047
+`http://localhost:8047`
