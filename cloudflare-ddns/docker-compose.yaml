@@ -1,3 +1,8 @@
+x-logging: &default-logging
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "3"
 services:
   cloudflare-ddns:
     image: favonia/cloudflare-ddns:latest
@@ -6,6 +11,7 @@ services:
     #   in the future and break things)
     # - "1" for the latest stable version whose major version is 1
     # - "1.x.y" to pin the specific version 1.x.y
+    logging: *default-logging
     network_mode: host
     # This bypasses network isolation and makes IPv6 easier (optional; see below)
     restart: always
