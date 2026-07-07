@@ -1,6 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body, button, input, .mantine-Text-root, .mantine-Title-root {
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+-webkit-font-smoothing: antialiased;
+}
+
+/* Kategorie-Titel: klarere Hierarchie durch Letter-Spacing + reduziertes Gewicht */
+[class*="category"] .mantine-Title-root,
+[class*="section"] .mantine-Title-root {
+font-weight: 500 !important;
+letter-spacing: 0.4px;
+text-transform: uppercase;
+font-size: 0.85em !important;
+opacity: 0.85;
+}
+
 :root {
 --glass-blur: blur(24px) saturate(180%) brightness(1.08);
---glass-bg: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%);
+--glass-bg: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
 --glass-border: 1px solid rgba(255,255,255,0.18);
 --glass-border-top: 1px solid rgba(255,255,255,0.45);
 --glass-border-left: 1px solid rgba(255,255,255,0.22);
@@ -13,7 +30,7 @@ inset 1px 0 0 rgba(255,255,255,0.1);
 }
 /* ── Header ── */
 header {
-background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)) !important;
+background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)) !important;
 backdrop-filter: var(--glass-blur) !important;
 -webkit-backdrop-filter: var(--glass-blur) !important;
 border-bottom: 1px solid rgba(255,255,255,0.12) !important;
@@ -22,7 +39,7 @@ box-shadow: 0 4px 16px rgba(0,0,0,0.3), inset 0 -1px 0 rgba(255,255,255,0.08);
 
 /* ── Sidebar ── */
 aside {
-background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)) !important;
+background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015)) !important;
 backdrop-filter: var(--glass-blur) !important;
 -webkit-backdrop-filter: var(--glass-blur) !important;
 border: var(--glass-border);
@@ -33,22 +50,23 @@ box-shadow: var(--glass-shadow);
 
 /* ── Avtive area ── */
 [data-active="true"] {
-background: rgba(255,255,255,0.12) !important;
-border: 1px solid rgba(255,255,255,0.2) !important;
+background: rgba(255,255,255,0.06) !important;
+border: 1px solid rgba(255,255,255,0.15) !important;
 box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 2px 8px rgba(0,0,0,0.2);
 }
 
 /* ── Drag tiles ── */
 [data-dnd-draggable] {
-background: var(--glass-bg) !important;
+background-image: var(--glass-bg), linear-gradient(135deg, rgba(0,0,128,0.65) 0%, rgba(255,255,255,0.12) 45%, rgba(255,255,255,0.03) 100%) !important;
+background-origin: border-box !important;
+background-clip: padding-box, border-box !important;
 backdrop-filter: var(--glass-blur);
 -webkit-backdrop-filter: var(--glass-blur);
-border: var(--glass-border);
-border-top: var(--glass-border-top);
-border-left: var(--glass-border-left);
+border: 1px solid transparent !important;
 box-shadow: var(--glass-shadow);
 border-radius: 16px;
-transition: box-shadow 0.2s ease, transform 0.15s ease;
+transform-origin: center center;
+transition: box-shadow 0.2s ease, transform 0.18s ease, z-index 0s;
 }
 
 /* ── Hover icons ── */
@@ -59,7 +77,9 @@ box-shadow:
 inset 0 1px 0 rgba(255,255,255,0.3),
 inset 0 -1px 0 rgba(0,0,0,0.15),
 inset 1px 0 0 rgba(255,255,255,0.15);
-transform: translateY(-1px);
+transform: translateY(-2px) scale(1.045);
+position: relative;
+z-index: 10;
 }
 
 /* ── Adds a cool red glow ── */
@@ -71,14 +91,31 @@ transition: filter 0.2s ease;
 
 /* ── Widget areas ── */
 .grid-stack-item-content {
-background: linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.15) 100%) !important;
+background-image: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.08) 100%), linear-gradient(135deg, rgba(0,0,128,0.6) 0%, rgba(255,255,255,0.12) 45%, rgba(255,255,255,0.03) 100%) !important;
+background-origin: border-box !important;
+background-clip: padding-box, border-box !important;
 backdrop-filter: var(--glass-blur);
 -webkit-backdrop-filter: var(--glass-blur);
-border: var(--glass-border) !important;
-border-top: var(--glass-border-top) !important;
+border: 1px solid transparent !important;
 border-radius: 16px !important;
 box-shadow: var(--glass-shadow) !important;
 overflow: hidden;
+transform-origin: center center;
+transition: box-shadow 0.2s ease, transform 0.18s ease;
+}
+
+/* Hinweis: Widgets liegen in einem Grid-Layout (grid-stack). Ein zu starkes
+   Scaling kann Nachbarkacheln überlappen/abschneiden. 1.02–1.03 ist meist
+   die Grenze, bei der es noch sauber aussieht. */
+.grid-stack-item-content:hover {
+transform: scale(1.025);
+position: relative;
+z-index: 5;
+box-shadow:
+0 14px 44px rgba(0,0,0,0.5),
+0 4px 14px rgba(0,0,0,0.3),
+inset 0 1px 0 rgba(255,255,255,0.3),
+inset 0 -1px 0 rgba(0,0,0,0.15) !important;
 }
 
 /* Glass highlight on widget top edge */
@@ -120,7 +157,7 @@ margin: 0 1px !important;
 
 /* ── Search bar ── */
 button.mantine-Input-input.mantine-TextInput-input {
-background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.04)) !important;
+background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)) !important;
 border: var(--glass-border) !important;
 border-top: var(--glass-border-top) !important;
 box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 4px 12px rgba(0,0,0,0.25) !important;
@@ -145,19 +182,14 @@ backdrop-filter: blur(8px);
 
 /* ── Optional: subtle shimmer sweep animation ──
 Remove this block if you prefer a static look */
-u/keyframes glass-shimmer {
-0% { left: -60%; }
-100% { left: 120%; }
+@keyframes glass-shimmer {
+0% { transform: skewX(-15deg) translateX(-150%); }
+100% { transform: skewX(-15deg) translateX(350%); }
 }
 
 .grid-stack-item-content {
 overflow: hidden;
 position: relative;
-}
-
-u/keyframes glass-shimmer {
-0% { transform: skewX(-15deg) translateX(-150%); }
-100% { transform: skewX(-15deg) translateX(350%); }
 }
 
 .grid-stack-item-content::after {
@@ -182,6 +214,56 @@ overflow: hidden;
 overflow: hidden;
 }
 
+/* ── Staggered Entrance: Kacheln blenden nacheinander ein ── */
+@keyframes tile-in {
+from { opacity: 0; transform: translateY(14px) scale(0.97); }
+to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+[data-dnd-draggable] {
+animation: tile-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Versetzte Verzögerung je Position im Grid (Reihenfolge im DOM) */
+[data-dnd-draggable]:nth-child(1)  { animation-delay: 0.00s; }
+[data-dnd-draggable]:nth-child(2)  { animation-delay: 0.05s; }
+[data-dnd-draggable]:nth-child(3)  { animation-delay: 0.10s; }
+[data-dnd-draggable]:nth-child(4)  { animation-delay: 0.15s; }
+[data-dnd-draggable]:nth-child(5)  { animation-delay: 0.20s; }
+[data-dnd-draggable]:nth-child(6)  { animation-delay: 0.25s; }
+[data-dnd-draggable]:nth-child(7)  { animation-delay: 0.30s; }
+[data-dnd-draggable]:nth-child(8)  { animation-delay: 0.35s; }
+[data-dnd-draggable]:nth-child(9)  { animation-delay: 0.40s; }
+[data-dnd-draggable]:nth-child(10) { animation-delay: 0.45s; }
+[data-dnd-draggable]:nth-child(n+11) { animation-delay: 0.5s; }
+}
+
+/* Bewegungsempfindlichkeit respektieren: keine Animationen/Scale-Effekte */
+@media (prefers-reduced-motion: reduce) {
+[data-dnd-draggable],
+.grid-stack-item-content,
+[data-dnd-draggable]:hover,
+.grid-stack-item-content:hover {
+animation: none !important;
+transition: none !important;
+transform: none !important;
+}
+}
+
 body {
 overflow-x: hidden;
+position: relative;
+}
+
+/* ── Noise-Overlay: verhindert "zu glatte" Blur-Flächen (Banding) ── */
+body::after {
+content: '';
+position: fixed;
+inset: 0;
+pointer-events: none;
+z-index: 2;
+opacity: 0.035;
+mix-blend-mode: overlay;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }

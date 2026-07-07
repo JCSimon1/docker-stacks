@@ -1,0 +1,12 @@
+services:
+
+  homarr-steam-widget:
+    build: .
+    container_name: homarr-steam-widget
+    restart: unless-stopped
+
+    env_file:
+      - .env
+
+    ports:
+      - "8047:3000"
