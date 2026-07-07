@@ -211,10 +211,10 @@ Format the project using Prettier.
 ## Screenshots
 
 ### Browser
-![Chrome](./screenshots/Example_Screenshot_Chrome.jpg?raw=true)
+![Chrome](screenshots/Example_Screenshot_Chrome.jpg?raw=true)
 
 ### Homarr
-![Homarr](./screenshots/Example_Screenshot_Homarr.jpg?raw=true)
+![Homarr](screenshots/Example_Screenshot_Homarr.jpg?raw=true)
 
 ---
 
