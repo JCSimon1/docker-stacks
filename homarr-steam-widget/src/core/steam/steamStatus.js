@@ -8,10 +8,4 @@ const STATUS = {
   6: "lookingToPlay",
 };
 
-class SteamClient {
-  async getPlayerSummary() {
-
-  }
-}
-
-export default new SteamClient();
+export default STATUS;

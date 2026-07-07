@@ -1,16 +1,16 @@
 import { Router } from "express";
 
-import steamClient from "../core/steam/steamClient.js";
+import steamService from "../core/steam/steamService.js";
 
 const router = Router();
 
 router.get("/", async (_req, res) => {
   try {
-    const player = await steamClient.getPlayerSummary();
+    const profile = await steamService.getProfile();
 
     res.json({
       success: true,
-      data: player,
+      data: profile,
     });
   } catch (err) {
     res.status(500).json({
