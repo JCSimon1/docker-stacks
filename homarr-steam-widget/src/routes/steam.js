@@ -4,21 +4,19 @@ import steamService from "../core/steam/steamService.js";
 
 const router = Router();
 
-router.get("/", async (_req, res) => {
+router.get("/", async (_req, res, next) => {
   try {
-    const profile = await steamService.getProfile();
+    const { profile, cached } = await steamService.getProfile();
 
     res.json({
       success: true,
+      meta: {
+        cached,
+      },
       data: profile,
     });
   } catch (err) {
-    res.status(500).json({
-      success: false,
-      error: {
-        message: err.message,
-      },
-    });
+    next(err);
   }
 });
 

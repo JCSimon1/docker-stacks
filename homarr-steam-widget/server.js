@@ -22,3 +22,15 @@ app.listen(PORT, () => {
     console.log(`Listening on ${PORT}`);
 
 });
+
+app.use((err, _req, res, _next) => {
+  console.error(err);
+
+  res.status(500).json({
+    success: false,
+    error: {
+      code: "INTERNAL_SERVER_ERROR",
+      message: err.message,
+    },
+  });
+});
