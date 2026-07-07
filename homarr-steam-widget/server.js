@@ -11,7 +11,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(express.static(path.join(__dirname, "public")));
-app.use("/api/health", healthRouter);
+app.use("/api/v1/health", healthRouter);
 import steamRouter from "./src/routes/steam.js";
 app.use("/api/v1/steam", steamRouter);
 
