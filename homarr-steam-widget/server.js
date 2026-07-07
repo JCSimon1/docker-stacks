@@ -12,6 +12,8 @@ const __dirname = path.dirname(__filename);
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/api/health", healthRouter);
+import steamRouter from "./src/routes/steam.js";
+app.use("/api/v1/steam", steamRouter);
 
 const PORT = config.port;
 
