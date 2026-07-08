@@ -1,38 +1,37 @@
-console.log("Neue ui.js geladen");
-
 export function renderProfile(profile) {
   const app = document.getElementById("app");
 
   app.innerHTML = `
-    <div class="steam-widget">
-
+    <div class="steam">
       <img
-        class="avatar"
+        class="steam-avatar"
         src="${profile.avatar}"
         alt="${profile.name}"
-      >
+      />
 
-      <div class="content">
+      <div class="steam-body">
+        <div class="steam-name">
+          ${profile.name}
+        </div>
 
-        <h2>${profile.name}</h2>
-
-        <p class="status ${profile.status}">
+        <div class="steam-status">
+          <span class="status-dot ${profile.status}"></span>
           ${profile.status}
-        </p>
+        </div>
 
-        <p class="game">
+        <div class="steam-game">
           ${profile.game ?? "Kein Spiel aktiv"}
-        </p>
+        </div>
 
         <a
+          class="steam-link"
           href="${profile.profileUrl}"
           target="_blank"
+          rel="noopener noreferrer"
         >
-          Steam Profil
+          Steam-Profil ↗
         </a>
-
       </div>
-
     </div>
   `;
 }

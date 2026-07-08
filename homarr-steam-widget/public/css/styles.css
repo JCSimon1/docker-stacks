@@ -1,70 +1,147 @@
+/* --------------------------------------------------
+   Homarr Steam Widget
+   v0.4.1
+--------------------------------------------------- */
+
+:root {
+    --steam-online: #23c552;
+    --steam-away: #f5a623;
+    --steam-busy: #e74c3c;
+    --steam-offline: #7f8c8d;
+
+    --text-primary: #f3f4f6;
+    --text-secondary: rgba(255,255,255,.72);
+
+    --avatar-size: 72px;
+}
+
+html,
 body {
-    width: 100%;
-    height: 100%;
+    color: #f3f4f6;
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    background: transparent;
+    background:
+        linear-gradient(
+        135deg,
+        rgba(15,23,42,.92),
+        rgba(30,41,59,.82)
+    );
+
+    backdrop-filter: blur(24px) saturate(180%) brightness(1.08);
+    -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(1.08);
 }
 
-.steam-widget {
+body{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
 
-    width: 100%;
-    height: 100%
-    box-sizing: border-box;
+#app{
+
+    width:100%;
+    height:100%;
+    padding:18px;
+    box-sizing:border-box;
+}
+
+.steam{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    width:100%;
+    height:100%;
+}
+
+.steam-avatar{
+    width:var(--avatar-size);
+    height:var(--avatar-size);
+    border-radius:50%;
+    flex-shrink:0;
+    object-fit:cover;
+    box-shadow:
+        0 6px 18px rgba(0,0,0,.35);
+}
+
+.steam-body{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:6px;
+    min-width:0;
+    flex:1;
+}
+
+.steam-name{
+    color: rgba(255,255,255,.72);
+    font-size:1.15rem;
+    font-weight:600;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.steam-status{
+    color: rgba(255,255,255,.72);
+    font-size:.92rem;
+    text-transform:capitalize;
     display: flex;
     align-items: center;
-}
-
-.avatar {
-    width: 96px;
-    height: 96px;
-    border-radius: 50%;
-}
-
-.content {
-    flex: 1;
-}
-
-.content h2 {
-    margin: 0;
-}
-
-.status {
-    margin-top: 8px;
-    font-weight: bold;
-    text-transform: capitalize;
+    gap: 8px;
 }
 
 .status-dot {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    display: inline-block;
-    margin-right: 8px;
-}
-
-.status.online {
-    color: #34d399;
+    flex-shrink: 0;
 }
 
 .status-dot.online {
-    background: #2ecc71;
+    background: #23c552;
 }
 
 .status-dot.offline {
-    background: #95a5a6;
+    background: #7f8c8d;
 }
 
-.game {
-    margin: 16px 0;
+.status-dot.busy {
+    background: #e74c3c;
 }
 
-a {
-    color: #60a5fa;
-    text-decoration: none;
+.status-dot.away {
+    background: #f39c12;
 }
 
+.status-dot.snooze {
+    background: #9b59b6;
+}
 
+.status-dot.lookingToTrade {
+    background: #3498db;
+}
 
+.status-dot.lookingToPlay {
+    background: #1abc9c;
+}
 
+.steam-game{
+    color: var(--text-primary);
+    font-size:.95rem;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.steam-link{
+    width:max-content;
+    margin-top:6px;
+    color: #8ab4ff;
+    text-decoration:none;
+    font-size:.88rem;
+    transition:opacity .2s ease;
+}
+
+.steam-link:hover{
+    opacity:.75;
+}
