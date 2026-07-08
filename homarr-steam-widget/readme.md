@@ -131,7 +131,9 @@ Example response:
 
 ```json
 {
-  "status": "ok"
+    "status":"ok",
+    "version":"0.1.0",
+    "uptime":187.7927476
 }
 ```
 
