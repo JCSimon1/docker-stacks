@@ -1,8 +1,91 @@
-export function renderProfile(profile) {
-  const app = document.getElementById("app");
+const app = document.getElementById("app");
 
+function formatLastUpdated(timestamp) {
+  if (!timestamp) {
+    return "unbekannt";
+  }
+
+  const diff = Math.floor(
+    (Date.now() - new Date(timestamp).getTime()) / 1000
+  );
+
+  if (diff < 10) {
+    return "gerade eben";
+  }
+
+  if (diff < 60) {
+    return `vor ${diff} Sekunden`;
+  }
+
+  const minutes = Math.floor(diff / 60);
+
+  if (minutes === 1) {
+    return "vor 1 Minute";
+  }
+
+  if (minutes < 60) {
+    return `vor ${minutes} Minuten`;
+  }
+
+  const hours = Math.floor(minutes / 60);
+
+  if (hours === 1) {
+    return "vor 1 Stunde";
+  }
+
+  return `vor ${hours} Stunden`;
+}
+
+export function renderLoading() {
+  app.innerHTML = `
+    <div class="steam steam-loading">
+
+      <div class="steam-avatar placeholder"></div>
+
+      <div class="steam-body">
+
+        <div class="steam-name placeholder-text">
+          Steam wird geladen…
+        </div>
+
+        <div class="steam-status">
+          Verbindung wird hergestellt
+        </div>
+
+      </div>
+
+    </div>
+  `;
+}
+
+export function renderError(message = "Steam API nicht erreichbar") {
+  app.innerHTML = `
+    <div class="steam steam-error">
+
+      <div class="steam-avatar error-icon">
+        ⚠
+      </div>
+
+      <div class="steam-body">
+
+        <div class="steam-name">
+          Fehler
+        </div>
+
+        <div class="steam-status">
+          ${message}
+        </div>
+
+      </div>
+
+    </div>
+  `;
+}
+
+export function renderProfile(profile) {
   app.innerHTML = `
     <div class="steam">
+
       <img
         class="steam-avatar"
         src="${profile.avatar}"
@@ -10,6 +93,7 @@ export function renderProfile(profile) {
       />
 
       <div class="steam-body">
+
         <div class="steam-name">
           ${profile.name}
         </div>
@@ -31,7 +115,11 @@ export function renderProfile(profile) {
         >
           Steam-Profil ↗
         </a>
+        <div class="steam-updated">
+          Updated: ${formatLastUpdated(profile.lastUpdated)}
+        </div>
       </div>
+
     </div>
   `;
 }

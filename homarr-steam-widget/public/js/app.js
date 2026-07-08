@@ -1,21 +1,32 @@
+let hasLoadedProfile = false;
+
 import { getSteamProfile } from "./api.js";
-import { renderProfile } from "./ui.js";
+import {
+  renderLoading,
+  renderProfile,
+  renderError
+} from "./ui.js";
+
 import { REFRESH_INTERVAL } from "./config.js";
 
-async function loadProfile() {
-  try {
-    const profile = await getSteamProfile();
+let refreshTimer;
 
-    renderProfile(profile);
-  } catch (error) {
-    console.error(error);
-  }
+try {
+  const profile = await getSteamProfile();
+
+  console.log("Profile:", profile);
+
+  renderProfile(profile);
+} catch (error) {
+  console.error(error);
+
+  renderError(error.message);
 }
 
-async function init() {
+async function scheduleRefresh() {
   await loadProfile();
 
-  setInterval(loadProfile, REFRESH_INTERVAL);
+  refreshTimer = setTimeout(scheduleRefresh, REFRESH_INTERVAL);
 }
 
-init();
+scheduleRefresh();

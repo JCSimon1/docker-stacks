@@ -145,3 +145,10 @@ body{
 .steam-link:hover{
     opacity:.75;
 }
+
+.steam-updated {
+    margin-top: 8px;
+    font-size: .75rem;
+    color: rgba(255,255,255,.45);
+    letter-spacing: .3px;
+}
