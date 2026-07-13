@@ -117,7 +117,6 @@ export function renderProfile(profile) {
       />
 
       <div class="steam-body">
-
         <div class="steam-name">
           ${profile.name}
         </div>
@@ -127,13 +126,17 @@ export function renderProfile(profile) {
           ${getStatusLabel(profile.status)}
         </div>
 
+        <hr class="steam-divider">
+
         <div class="steam-game">
           ${
             profile.game
               ? `🎮 ${profile.game}`
-              : "Nicht im Spiel"
+              : "🎮 Nicht im Spiel"
           }
         </div>
+
+        <hr class="steam-divider">
 
         <a
           class="steam-link"
@@ -143,11 +146,11 @@ export function renderProfile(profile) {
         >
           Steam-Profil ↗
         </a>
+
         <div class="steam-updated">
-          Updated: ${formatLastUpdated(profile.lastUpdated)}
+          Aktualisiert ${formatLastUpdated(profile.lastUpdated)}
         </div>
       </div>
-
     </div>
   `;
 }
