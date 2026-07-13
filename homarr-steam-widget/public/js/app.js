@@ -11,6 +11,7 @@ async function loadProfile() {
     const profile = await getSteamProfile();
 
     console.log("Profile:", profile);
+    console.log("Status =", profile.status);
 
     currentProfile = profile;
     renderProfile(profile);

@@ -91,38 +91,44 @@ body{
 }
 
 .status-dot {
+    display: inline-block;
     width: 10px;
     height: 10px;
     border-radius: 50%;
     flex-shrink: 0;
+    transition:
+        background-color .25s ease,
+        box-shadow .25s ease,
+        transform .2s ease;
 }
 
-.status-dot.online {
+.status-dot.status-online {
     background: #23c552;
+    box-shadow:
+        0 0 6px rgba(35,197,82,.8),
+        0 0 14px rgba(35,197,82,.35);
+    animation: steam-pulse 2.5s ease-in-out infinite;
 }
 
-.status-dot.offline {
+.status-dot.status-offline {
     background: #7f8c8d;
 }
 
-.status-dot.busy {
-    background: #e74c3c;
-}
-
-.status-dot.away {
+.status-dot.status-away,
+.status-dot.status-snooze {
     background: #f39c12;
 }
 
-.status-dot.snooze {
-    background: #9b59b6;
+.status-dot.status-busy {
+    background: #e74c3c;
 }
 
-.status-dot.lookingToTrade {
+.status-dot.status-lookingToTrade {
     background: #3498db;
 }
 
-.status-dot.lookingToPlay {
-    background: #1abc9c;
+.status-dot.status-lookingToPlay {
+    background: #00c2ff;
 }
 
 .steam-game{
@@ -151,4 +157,23 @@ body{
     font-size: .75rem;
     color: rgba(255,255,255,.45);
     letter-spacing: .3px;
+}
+
+@keyframes steam-pulse {
+
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.15);
+        opacity: .85;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
 }

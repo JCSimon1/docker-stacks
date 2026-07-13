@@ -1,5 +1,36 @@
 const app = document.getElementById("app");
 
+function getStatusLabel(status) {
+
+  switch (status) {
+
+    case "online":
+      return "Online";
+
+    case "offline":
+      return "Offline";
+
+    case "away":
+      return "Abwesend";
+
+    case "busy":
+      return "Beschäftigt";
+
+    case "snooze":
+      return "Abwesend";
+
+    case "lookingToTrade":
+      return "Handel";
+
+    case "lookingToPlay":
+      return "Spiel gesucht";
+
+    default:
+      return status;
+  }
+
+}
+
 export function formatLastUpdated(timestamp) {
 
   if (!timestamp) {
@@ -92,12 +123,16 @@ export function renderProfile(profile) {
         </div>
 
         <div class="steam-status">
-          <span class="status-dot ${profile.status}"></span>
-          ${profile.status}
+          <span class="status-dot status-${profile.status}"></span>
+          ${getStatusLabel(profile.status)}
         </div>
 
         <div class="steam-game">
-          ${profile.game ?? "Kein Spiel aktiv"}
+          ${
+            profile.game
+              ? `🎮 ${profile.game}`
+              : "Nicht im Spiel"
+          }
         </div>
 
         <a
