@@ -12,6 +12,13 @@
     --text-primary: #f3f4f6;
     --text-secondary: rgba(255,255,255,.72);
 
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+
+    --radius-md: 12px;
+    --radius-lg: 16px;
+
     --avatar-size: 72px;
 }
 
@@ -51,16 +58,6 @@ body{
     gap:18px;
     width:100%;
     height:100%;
-}
-
-.steam-avatar{
-    width:var(--avatar-size);
-    height:var(--avatar-size);
-    border-radius:50%;
-    flex-shrink:0;
-    object-fit:cover;
-    box-shadow:
-        0 6px 18px rgba(0,0,0,.35);
 }
 
 .steam-body{
@@ -134,15 +131,12 @@ body{
 .steam-avatar {
     width: 72px;
     height: 72px;
-
     border-radius: 50%;
     object-fit: cover;
-
-    border: 3px solid transparent;
-
+    border: 2px solid transparent;
     transition:
-        border-color .3s ease,
-        box-shadow .3s ease,
+        border-color .25s ease,
+        box-shadow .25s ease,
         transform .2s ease;
 }
 
