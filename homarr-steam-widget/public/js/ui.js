@@ -129,7 +129,20 @@ export function renderProfile(profile) {
         </div>
 
         <hr class="steam-divider">
-
+  
+        ${
+        profile.gameId
+          ? `
+          <img
+            class="steam-game-header"
+            src="https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/${profile.gameId}/header.jpg"
+            alt="${profile.game}"
+            loading="lazy"
+          />
+          `
+          : ""
+        }
+        
         <div class="steam-game">
           ${
             profile.game
