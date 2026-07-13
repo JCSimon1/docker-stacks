@@ -138,7 +138,10 @@ export function renderProfile(profile) {
           }
         </div>
 
-        <div class="steam-session">
+        <div 
+          id="steam-session"  
+          class="steam-session"
+        >
           ${
             profile.session?.gameStartedAt
                 ? formatDuration(profile.session.gameStartedAt)

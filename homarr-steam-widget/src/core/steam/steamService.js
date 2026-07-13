@@ -34,8 +34,6 @@ class SteamService {
 
     const session = updateSession(cached);
 
-    console.log("Session:", session);
-    
     return {
       profile: cached,
       cached: true,
@@ -63,7 +61,6 @@ class SteamService {
   cache.set(CACHE_KEY, profile, config.cache.ttl);
   cache.set(LAST_KNOWN_KEY, profile, LAST_KNOWN_TTL);
 
-  console.log("Session:", session);
   return {
     profile,
     cached: false,

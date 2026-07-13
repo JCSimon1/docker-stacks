@@ -15,6 +15,7 @@ async function loadProfile() {
 
     currentProfile = profile;
     renderProfile(profile);
+
   } catch (error) {
     console.error(error);
 
@@ -26,20 +27,29 @@ async function loadProfile() {
 async function scheduleRefresh() {
   await loadProfile();
 
-  refreshTimer = setTimeout(scheduleRefresh, REFRESH_INTERVAL);
+  refreshTimer = setTimeout(
+    scheduleRefresh,
+    REFRESH_INTERVAL
+  );
 }
 
 function scheduleTick() {
-  // Rendert nur den "Updated: vor X Sekunden"-Text neu,
-  // unabhängig vom API-Poll, damit die Anzeige flüssig hochzählt
-  // statt in REFRESH_INTERVAL-Sprüngen.
   tickTimer = setInterval(() => {
-    if (currentProfile) {
-      renderProfile(currentProfile);
+    if (!currentProfile) {
+      return;
     }
+
+    renderProfile(currentProfile);
   }, 1000);
 }
 
-renderLoading();
-scheduleRefresh();
-scheduleTick();
+async function init() {
+  renderLoading();
+
+  await loadProfile();
+
+  scheduleRefresh();
+  scheduleTick();
+}
+
+init();

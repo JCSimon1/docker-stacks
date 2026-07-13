@@ -25,3 +25,24 @@ export function formatDuration(start) {
     return `seit ${hours} Std. ${remainingMinutes} Min.`;
 
 }
+
+export function startRelativeTimer(selector, startTime) {
+
+    if (!startTime) {
+        return;
+    }
+
+    const element = document.querySelector(selector);
+
+    if (!element) {
+        return;
+    }
+
+    const update = () => {
+        element.textContent = formatDuration(startTime);
+    };
+
+    update();
+
+    setInterval(update, 1000);
+}
