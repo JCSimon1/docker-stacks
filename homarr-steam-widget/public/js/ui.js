@@ -111,7 +111,7 @@ export function renderProfile(profile) {
     <div class="steam">
 
       <img
-        class="steam-avatar"
+        class="steam-avatar avatar-${profile.status}"
         src="${profile.avatar}"
         alt="${profile.name}"
       />

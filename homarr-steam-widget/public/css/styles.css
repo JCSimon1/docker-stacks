@@ -131,6 +131,55 @@ body{
     background: #00c2ff;
 }
 
+.steam-avatar {
+    width: 72px;
+    height: 72px;
+
+    border-radius: 50%;
+    object-fit: cover;
+
+    border: 3px solid transparent;
+
+    transition:
+        border-color .3s ease,
+        box-shadow .3s ease,
+        transform .2s ease;
+}
+
+.steam-avatar.avatar-online {
+    border-color: #23c552;
+
+    box-shadow:
+        0 0 10px rgba(35,197,82,.45);
+}
+
+.steam-avatar.avatar-offline {
+    border-color: rgba(255,255,255,.18);
+}
+
+.steam-avatar.avatar-away,
+.steam-avatar.avatar-snooze {
+    border-color: #f39c12;
+
+    box-shadow:
+        0 0 10px rgba(243,156,18,.35);
+}
+
+.steam-avatar.avatar-busy {
+    border-color: #e74c3c;
+
+    box-shadow:
+        0 0 10px rgba(231,76,60,.35);
+}
+
+.steam-avatar.avatar-lookingToTrade {
+    border-color: #3498db;
+}
+
+.steam-avatar.avatar-lookingToPlay {
+    border-color: #00c2ff;
+}
+
 .steam-game{
     color: var(--text-primary);
     font-size:.95rem;
