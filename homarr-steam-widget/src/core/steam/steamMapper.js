@@ -7,6 +7,7 @@ export function mapPlayer(player) {
     avatar: player.avatarfull,
     status: STATUS[player.personastate] ?? "unknown",
     game: player.gameextrainfo ?? null,
+    gameId: player.gameid ?? null,
     profileUrl: player.profileurl,
     lastUpdated: new Date().toISOString(),
   };
