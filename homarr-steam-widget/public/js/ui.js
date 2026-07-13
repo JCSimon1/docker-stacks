@@ -1,8 +1,9 @@
 const app = document.getElementById("app");
 
-function formatLastUpdated(timestamp) {
+export function formatLastUpdated(timestamp) {
+
   if (!timestamp) {
-    return "unbekannt";
+    return "Woher soll ich das wissen?";
   }
 
   const diff = Math.floor(
@@ -19,19 +20,11 @@ function formatLastUpdated(timestamp) {
 
   const minutes = Math.floor(diff / 60);
 
-  if (minutes === 1) {
-    return "vor 1 Minute";
-  }
-
   if (minutes < 60) {
     return `vor ${minutes} Minuten`;
   }
 
   const hours = Math.floor(minutes / 60);
-
-  if (hours === 1) {
-    return "vor 1 Stunde";
-  }
 
   return `vor ${hours} Stunden`;
 }
