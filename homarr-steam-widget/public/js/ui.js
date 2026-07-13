@@ -1,3 +1,5 @@
+import { formatDuration } from "./time.js";
+
 const app = document.getElementById("app");
 
 function getStatusLabel(status) {
@@ -133,6 +135,14 @@ export function renderProfile(profile) {
             profile.game
               ? `🎮 ${profile.game}`
               : "🎮 Nicht im Spiel"
+          }
+        </div>
+
+        <div class="steam-session">
+          ${
+            profile.session?.gameStartedAt
+                ? formatDuration(profile.session.gameStartedAt)
+                : ""
           }
         </div>
 

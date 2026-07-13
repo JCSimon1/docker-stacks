@@ -6,14 +6,17 @@ const router = Router();
 
 router.get("/", async (_req, res, next) => {
   try {
-    const { profile, cached } = await steamService.getProfile();
+    const { profile, cached, session } = await steamService.getProfile();
 
     res.json({
       success: true,
       meta: {
         cached,
       },
-      data: profile,
+      data: {
+        ...profile,
+        session,
+      },
     });
   } catch (err) {
     next(err);

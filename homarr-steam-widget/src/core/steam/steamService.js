@@ -4,6 +4,10 @@ import config from "../../config/index.js";
 import steamClient from "./steamClient.js";
 import { mapPlayer } from "./steamMapper.js";
 import { log } from "../../utils/logger.js";
+import {
+    memoryCache,
+    updateSession
+} from "../../cache/index.js";
 
 const CACHE_KEY = "steam.profile";
 const LAST_KNOWN_KEY = "steam.profile.lastKnown";
@@ -21,39 +25,52 @@ function hasStatusChanged(previous, current) {
 
 class SteamService {
   async getProfile() {
-    const cached = cache.get(CACHE_KEY);
 
-    if (cached) {
-      log("SteamService", "Cache hit");
+  const cached = cache.get(CACHE_KEY);
 
-      return {
-        profile: cached,
-        cached: true,
-      };
-    }
+  if (cached) {
 
-    log("SteamService", "Cache miss");
+    log("SteamService", "Cache hit");
 
-    const player = await steamClient.getPlayerSummary();
-    const mapped = mapPlayer(player);
+    const session = updateSession(cached);
 
-    const previous = cache.get(LAST_KNOWN_KEY);
-
-    const profile = {
-      ...mapped,
-      lastUpdated: hasStatusChanged(previous, mapped)
-        ? new Date().toISOString()
-        : previous.lastUpdated,
-    };
-
-    cache.set(CACHE_KEY, profile, config.cache.ttl);
-    cache.set(LAST_KNOWN_KEY, profile, LAST_KNOWN_TTL);
-
+    console.log("Session:", session);
+    
     return {
-      profile,
-      cached: false,
+      profile: cached,
+      cached: true,
+      session,
     };
+
   }
+
+  log("SteamService", "Cache miss");
+
+  const player = await steamClient.getPlayerSummary();
+  const mapped = mapPlayer(player);
+  const previous = cache.get(LAST_KNOWN_KEY);
+
+  const profile = {
+    ...mapped,
+
+    lastUpdated: hasStatusChanged(previous, mapped)
+      ? new Date().toISOString()
+      : previous?.lastUpdated ?? new Date().toISOString(),
+  };
+
+  const session = updateSession(profile);
+
+  cache.set(CACHE_KEY, profile, config.cache.ttl);
+  cache.set(LAST_KNOWN_KEY, profile, LAST_KNOWN_TTL);
+
+  console.log("Session:", session);
+  return {
+    profile,
+    cached: false,
+    session,
+  };
+
+}
 }
 
 export default new SteamService();
