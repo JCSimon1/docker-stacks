@@ -1,0 +1,14 @@
+{
+  "Move-downloaded-files-to-SMB-Incoming-folder": {
+    "paths": { "home": "/incoming", "temp": "/downloads" }
+  },
+  "Embed-subtitles-and-force-MKV": {
+    "writesubtitles": true,
+    "subtitleslangs": ["de", "en"],
+    "postprocessors": [
+      { "key": "FFmpegVideoRemuxer", "preferedformat": "mkv" },
+      { "key": "FFmpegEmbedSubtitle" }
+      { "key": "Exec", "exec_cmd": "/notifications/notify.sh %(title)q %(resolution)q %(duration_string)q %(filesize,filesize_approx)q", "when": "after_move" }
+    ]
+  }
+}

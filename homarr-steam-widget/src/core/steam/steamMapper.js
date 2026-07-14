@@ -9,6 +9,7 @@ export function mapPlayer(player) {
     game: player.gameextrainfo ?? null,
     gameId: player.gameid ?? null,
     profileUrl: player.profileurl,
+    badges: player.badges,
     lastUpdated: new Date().toISOString(),
   };
 }

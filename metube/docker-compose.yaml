@@ -1,8 +1,9 @@
 x-logging: &default-logging
   driver: "json-file"
   options:
-    max-size: "10m"
+    max-size: "50m"
     max-file: "3"
+    
 services:
   metube:
     image: ghcr.io/alexta69/metube:latest
@@ -13,18 +14,20 @@ services:
     ports:
       - "8081:8081"
     volumes:
-      - ${SMBSHARE_FOLDER}:/downloads
-      - metube_state:/downloads/.metube        # State on local volume
+      - ${DOWNLOADS}:/downloads
+      - ${SMBSHARE}:/incoming
+      - ${YTDL_OPTIONS_PRESETS_FILE}:/config/presets.json:ro
+      - ${NOTIFY}:/notifications:ro
     environment:
       - DOWNLOAD_DIR=/downloads
-      - STATE_DIR=/downloads/.metube
       - YTDL_OPTIONS=${YTDL_OPTIONS}
-      - OUTPUT_TEMPLATE=%(uploader)s/%(title)s.%(ext)s
-      - RESTRICT_FILENAMES=true
-      - TZ=Europe/Berlin
-      - DELETE_FILE_ON_TRASHCAN=true
+      - YTDL_OPTIONS_PRESETS_FILE=/config/presets.json
+      - OUTPUT_TEMPLATE=${OUTPUT_TEMPLATE}
+      - TZ=${TIMEZONE}
       - LOGLEVEL=${LOGLEVEL}
       - DEFAULT_THEME=${DEFAULT_THEME}
-
+      - MAX_CONCURRENT_DOWNLOADS=1
+      - NTFY_TOPIC=${NTFY_TOPIC}
+      
 volumes:
   metube_state:
